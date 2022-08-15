@@ -32,6 +32,13 @@ set(HYPRE_DIR
     CACHE PATH "Path to hypre installation directory"
 )
 
+
+option(ENABLE_LIBENSEMBLE "Enable libEnsemble" ON)
+set(LIBENSEMBLE_DIR
+    "${LIBENSEMBLE_DIR}"
+    CACHE PATH "Path to libEnsemble installation directory"
+)
+
 option(ENABLE_MFEM "Enable MFEM" ON)
 set(MFEM_DIR
     "${MFEM_DIR}"
@@ -125,6 +132,11 @@ if(ENABLE_HYPRE)
     find_package(HYPRE REQUIRED)
 endif()
 
+# check for libEnsemble
+if(ENABLE_LIBENSEMBLE)
+    find_package(libENSEMBLE REQUIRED)
+endif()
+
 # check for MFEM
 if(ENABLE_MFEM)
     find_package(ZLIB REQUIRED)
@@ -180,6 +192,9 @@ endif()
 if(ENABLE_HYPRE)
     add_subdirectory(hypre)
 endif()
+if(ENABLE_LIBENSEMBLE)
+    add_subdirectory(libensemble)
+endif()
 if(ENABLE_MFEM)
     add_subdirectory(mfem)
 endif()
@@ -198,3 +213,4 @@ endif()
 if(ENABLE_STRUMPACK)
     add_subdirectory(strumpack)
 endif()
+
