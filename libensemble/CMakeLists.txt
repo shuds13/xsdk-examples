@@ -1,5 +1,6 @@
 # Example needs updating.
-add_executable(test_persistent_aposmm_tao.py)
+
+find_package(Python REQUIRED)
 
 xsdk_add_test(
     NAME
@@ -7,7 +8,6 @@ xsdk_add_test(
     MPI_NPROCS
     4
     COMMAND
-    python
-    $<TARGET_FILE:test_persistent_aposmm_tao.py>
+    ${Python_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_persistent_aposmm_tao.py
 )
 
